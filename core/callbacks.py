@@ -12,6 +12,7 @@ class GANMonitor(Callback):
         self.seed = tf.random.normal([16, latent_dim])
         
     def on_epoch_end(self, epoch, logs=None):
+        # Generate random images for visualising
         generated_images = self.model.generator(self.seed)
         generated_images = (generated_images - 127.5) / 127.5
         generated_images.numpy()
@@ -30,4 +31,3 @@ class GANMonitor(Callback):
         
     def on_train_end(self, logs=None):
         self.model.generator.save("generator.h5")
-        
