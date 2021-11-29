@@ -77,17 +77,15 @@ class DCGAN(keras.Model):
     def metrics(self):
         return [self.d_loss_metric, self.g_loss_metric]
 
-def build_generator(width, height, depth):
-    LATENT_DIM = 100
-    
-    # Weight init. Taken from DCGAN paper
+def build_generator(width, height, depth, latent_dim):
+     # Weight init. Taken from DCGAN paper
     WEIGHT_INIT = tf.keras.initializers.RandomNormal(mean=0.0, stddev=0.02)
     w = width // 4
     h = height // 4
     
     model = Sequential(name="Generator")
     
-    model.add(Dense(w * h * 256, input_dim=LATENT_DIM))
+    model.add(Dense(w * h * 256, input_dim=latent_dim))
     model.add(BatchNormalization())
     model.add(ReLU())
     model.add(Reshape((w, h, 256)))
