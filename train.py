@@ -12,7 +12,7 @@ info("Downnload and split model.")
 (train_images, train_labels), (_, _) = fashion_mnist.load_data()
 
 info("Reshape the dataset to add a channel dimension and convert it to float.")
-train_images = train_images.reshape(train_images.shape[0], 28, 28, 1).astype("float32")
+train_images = train_images.reshape(train_images.shape[0], config.WIDTH, config.HEIGHT, config.DEPTH).astype("float32")
 
 info("Normalise the value in the range [-1, 1] because we use tanh in generator.")
 train_images = (train_images - 127.5) / 127.5
